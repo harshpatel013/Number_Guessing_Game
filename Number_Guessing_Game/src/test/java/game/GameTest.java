@@ -8,15 +8,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-/**
- * Unit Tests — Number Guessing Game
- * ===================================
- * Run with Maven:  mvn test
- * Run with Gradle: gradle test
- */
+
 class GameTest {
 
-    // ── Difficulty tests ─────────────────────────────────────────────────────
+   
     @Test
     void testAllDifficultiesExist() {
         assertEquals(4, Difficulty.values().length);
@@ -84,10 +79,7 @@ class GameTest {
         assertEquals(1, st.getLost());
     }
 
-    // ── Game.getValidGuess tests ─────────────────────────────────────────────
-    /**
-     * Helper: creates a Game whose Scanner reads from the given string.
-     */
+  
     private Game gameWithInput(String input) {
         Scanner sc = new Scanner(new ByteArrayInputStream(input.getBytes()));
         return new Game(Difficulty.EASY, sc);
@@ -113,19 +105,19 @@ class GameTest {
 
     @Test
     void testNonIntegerThenValid() {
-        // "abc" is rejected, then "7" is accepted
+        
         Game game = gameWithInput("abc\n7\n");
         assertEquals(7, game.getValidGuess(1, 20));
     }
 
     @Test
     void testOutOfRangeThenValid() {
-        // "0" is out of range, "21" is out of range, then "15" is accepted
+       
         Game game = gameWithInput("0\n21\n15\n");
         assertEquals(15, game.getValidGuess(1, 20));
     }
 
-    // ── Game.displayProgressBar tests ────────────────────────────────────────
+    
     @Test
     void testProgressBarFullAtStart() {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
