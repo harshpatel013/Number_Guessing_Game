@@ -1,9 +1,6 @@
 package game;
 
-/**
- * Difficulty levels for the Number Guessing Game.
- * Each level defines a name, the maximum secret number, and the attempt limit.
- */
+
 public enum Difficulty {
 
     EASY   ("Easy",   20,  8),
