@@ -1,66 +1,90 @@
-# Number Guessing Game — Java 🎯
+# Number Guessing Game 🎯
+### Java Mini Project | DSA / Programming Lab Assignment
 
-A fully-featured, console-based **Number Guessing Game** written in Java — demonstrating `while` loops and `if-else` feedback, with difficulty levels, dynamic hints, a session score tracker, and JUnit 5 unit tests.
+Hey! This is a simple number guessing game built in Java. The computer picks a random number and you have to guess it. After each guess it tells you if you went too high or too low. That's basically it.
+
+I built this to practice `while` loops and `if-else` statements — which are honestly the two things that show up in every Java program ever.
 
 ---
 
-## Project Structure
+## What does the game do?
+
+- Picks a random secret number
+- Gives you a limited number of chances to guess it
+- After each wrong guess → tells you "too high" or "too low"
+- Narrows the hint range as you guess (so it actually helps you)
+- Tracks your score across multiple rounds
+- Has 4 difficulty levels if you want a challenge
+
+---
+
+## Files in this project
 
 ```
 number-guessing-game-java/
 ├── src/
 │   ├── main/java/game/
-│   │   ├── Main.java          ← entry point, menus, replay loop
-│   │   ├── Game.java          ← core game logic (while + if-else)
-│   │   ├── Difficulty.java    ← enum for 4 difficulty levels
-│   │   └── ScoreTracker.java  ← session score tracking
+│   │   ├── Main.java          ← start here, this runs everything
+│   │   ├── Game.java          ← the actual game logic lives here
+│   │   ├── Difficulty.java    ← easy / medium / hard / expert settings
+│   │   └── ScoreTracker.java  ← keeps track of wins and losses
 │   └── test/java/game/
-│       └── GameTest.java      ← JUnit 5 unit tests (18 tests)
-├── pom.xml                    ← Maven build file
+│       └── GameTest.java      ← tests (18 of them, all pass)
+├── pom.xml                    ← Maven config (ignore if not using Maven)
 ├── .gitignore
-└── README.md
+└── README.md                  ← you are here
 ```
 
 ---
 
-## Quick Start
+## How to run it
 
-### Prerequisites
-- Java 17 or newer
-- Maven 3.8+  (or just use the manual `javac` commands below)
+### The simple way (just javac, no Maven needed)
 
-### Option A — Maven (recommended)
+Make sure Java is installed first. Open your terminal and type:
 
 ```bash
-# Clone
-git clone https://github.com/<your-username>/number-guessing-game-java.git
-cd number-guessing-game-java
-
-# Compile + run
-mvn compile
-mvn exec:java -Dexec.mainClass="game.Main"
-
-# Run tests
-mvn test
-
-# Build executable JAR
-mvn package
-java -jar target/number-guessing-game.jar
+java --version
 ```
 
-### Option B — Plain javac (no Maven needed)
+If you see a version number, you're good. If not, download Java from [adoptium.net](https://adoptium.net) and install it.
+
+Then:
 
 ```bash
-# Compile
+# Step 1 — go into the project folder
+cd number-guessing-game-java
+
+# Step 2 — make a folder for the compiled files
+mkdir out
+
+# Step 3 — compile
 javac -d out src/main/java/game/*.java
 
-# Run
+# Step 4 — run!
 java -cp out game.Main
 ```
 
+That's it. The game starts in your terminal.
+
+### If you're using IntelliJ IDEA
+
+1. Open IntelliJ → click **Open** → select this folder
+2. Wait for it to finish loading (takes like 10 seconds)
+3. Open `Main.java`
+4. Click the green play button ▶ next to `public static void main`
+5. Game runs in the bottom panel
+
+### If you're using VS Code
+
+1. Install the **"Extension Pack for Java"** from the extensions sidebar
+2. Open this folder in VS Code
+3. Open `Main.java`
+4. Click **Run** that appears just above the `main` method
+
 ---
 
-## How to Play
+## Sample output
 
 ```
 ==================================================
@@ -97,56 +121,57 @@ Your guess (11–14): 13
 
 ---
 
-## Java Concepts Demonstrated
+## Java concepts used in this project
+
+This project was made specifically to practice these topics:
+
+**`while` loop** — the game keeps running as long as you have attempts left. The moment you guess correctly or run out of chances, the loop stops.
 
 ```java
-// while loop — keeps the game going while attempts remain
 while (attemptsUsed < maxAttempts) {
-
-    int guess = getValidGuess(hintLow, hintHigh);
-    attemptsUsed++;
-
-    // if-else — feedback after every guess
-    if (guess < secret) {
-        System.out.println("Too low!");
-    } else if (guess > secret) {
-        System.out.println("Too high!");
-    } else {
-        System.out.println("Correct!");
-        break;   // exit loop early on a win
-    }
+    // ask for a guess, check it, repeat
 }
 ```
 
-| Concept | Where used |
-|---|---|
-| `while` loop | Main game loop in `Game.java` |
-| `if / else if / else` | Guess feedback |
-| `break` | Early exit on correct guess |
-| `try / catch NumberFormatException` | Input validation |
-| `enum` | `Difficulty.java` — 4 levels as a type-safe enum |
-| `Random.nextInt()` | Secret number generation |
-| OOP — classes | `Game`, `ScoreTracker`, `Difficulty`, `Main` |
-| JUnit 5 | `GameTest.java` — 18 unit tests |
+**`if / else if / else`** — checks your guess and prints the right message:
+
+```java
+if (guess < secret) {
+    System.out.println("Too low!");
+} else if (guess > secret) {
+    System.out.println("Too high!");
+} else {
+    System.out.println("Correct!");
+    break;  // stop the loop early
+}
+```
+
+**`break`** — exits the loop the moment you win, so it doesn't keep asking for guesses.
+
+**`try / catch`** — handles it gracefully if you type "abc" instead of a number. Doesn't crash, just asks again.
+
+**`enum`** — `Difficulty.java` uses an enum to store the four difficulty settings cleanly instead of scattering numbers everywhere.
+
+**Classes** — the code is split into 4 classes. Each one does one thing. `Game` plays the game, `ScoreTracker` tracks scores, etc.
 
 ---
 
-## Running Tests
+## Common errors and fixes
 
-```
-$ mvn test
+**`javac: command not found`**
+→ Java isn't installed. Download from [adoptium.net](https://adoptium.net)
 
--------------------------------------------------------
- T E S T S
--------------------------------------------------------
-Running game.GameTest
-Tests run: 18, Failures: 0, Errors: 0, Skipped: 0
+**`error: file not found`**
+→ Make sure you're inside the `number-guessing-game-java` folder when you run the commands
 
-BUILD SUCCESS
-```
+**`could not find or load main class game.Main`**
+→ You probably skipped the `mkdir out` step or the compile step. Run all 4 steps in order.
+
+**Game compiles but shows weird characters instead of █**
+→ Your terminal doesn't support UTF-8. On Windows, run `chcp 65001` before starting the game.
 
 ---
 
 ## License
 
-MIT — free to use, modify, and distribute.
+Do whatever you want with this. MIT license.
