@@ -10,7 +10,7 @@ public class Game {
     private final Scanner    scanner;
     private final Random     random;
 
-    // ── Constructor ──────────────────────────────────────────────────────────
+   
     public Game(Difficulty difficulty, Scanner scanner) {
         this.difficulty = difficulty;
         this.scanner    = scanner;
