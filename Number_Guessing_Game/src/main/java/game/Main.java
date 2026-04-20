@@ -2,11 +2,7 @@ package game;
 
 import java.util.Scanner;
 
-/**
- * Number Guessing Game — Entry Point
- * ====================================
- * Run:  javac src/main/java/game/*.java -d out && java -cp out game.Main
- */
+
 public class Main {
 
     public static void main(String[] args) {
@@ -34,14 +30,14 @@ public class Main {
         scanner.close();
     }
 
-    // ── Banner ──────────────────────────────────────────────────────────────
+    
     private static void printBanner() {
         System.out.println("\n" + "=".repeat(50));
         System.out.println("       NUMBER GUESSING GAME");
         System.out.println("=".repeat(50));
     }
 
-    // ── Difficulty menu ──────────────────────────────────────────────────────
+   
     private static Difficulty chooseDifficulty(Scanner scanner) {
         Difficulty[] options = Difficulty.values();
 
